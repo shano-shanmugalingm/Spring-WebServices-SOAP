@@ -1,0 +1,78 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xmlns:nce="http://www.austco.com/nursecallevents/schemas"
+        elementFormDefault="qualified"
+        targetNamespace="http://www.austco.com/nursecallevents/schemas">
+    <xs:element name="NurseCallEvent">
+        <xs:complexType>
+            <xs:all>
+                <xs:element name="Event" type="nce:Event"/>                                                    
+                <xs:element name="DeviceMessage" type="xs:string"/>
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="Event">
+        <xs:sequence>
+        	<xs:element name="Cpid" type="xs:string" maxOccurs="1"
+        		minOccurs="1">
+        	</xs:element>
+        	<xs:element name="FQLocation" type="xs:string" maxOccurs="1"
+        		minOccurs="1" />
+        	<xs:element name="DeviceModel" type="xs:string"
+        		maxOccurs="1" minOccurs="1">
+        	</xs:element>
+        	<xs:element name="CallType" type="xs:string" maxOccurs="1"
+        		minOccurs="1" />
+        	<xs:element name="StartTime" type="xs:dateTime"
+        		maxOccurs="1" minOccurs="1">
+        	</xs:element>
+        	<xs:element name="EndTime" type="xs:dateTime" maxOccurs="1"
+        		minOccurs="1">
+        	</xs:element>
+        	<xs:element name="AssetName" type="xs:string" maxOccurs="1"
+        		minOccurs="0">
+        	</xs:element>
+        	<xs:element name="Escalations" type="nce:Escalation"
+        		maxOccurs="unbounded" minOccurs="1">
+        	</xs:element>
+        	<xs:element name="Transitions" type="nce:Transition"
+        		maxOccurs="unbounded" minOccurs="1">
+        	</xs:element>
+        	<xs:element name="Contacts" type="nce:Contact"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Escalation">
+    	<xs:sequence>
+    		<xs:element name="StartTime" type="xs:dateTime" maxOccurs="1" minOccurs="1"></xs:element>
+    		<xs:element name="EndTime" type="xs:dateTime" maxOccurs="1" minOccurs="1"></xs:element>
+    		<xs:element name="Level" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Transition">
+    	<xs:sequence>
+    		<xs:element name="StartTime" type="xs:dateTime" maxOccurs="1" minOccurs="1"></xs:element>
+    		<xs:element name="EndTime" type="xs:dateTime" maxOccurs="1" minOccurs="1"></xs:element>
+    		<xs:element name="Name" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+    		<xs:element name="SourceLocation" type="xs:string" maxOccurs="1" minOccurs="0"></xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Contact">
+    	<xs:sequence>
+    		<xs:element name="Name" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+    		<xs:element name="Devices" type="nce:Device" maxOccurs="unbounded" minOccurs="0"></xs:element>
+    		<xs:element name="MessageDispatchedAt" type="xs:dateTime"></xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Device">
+    	<xs:sequence>
+    		<xs:element name="DeviceName" type="xs:string"></xs:element>
+    		<xs:element name="DeviceType" type="xs:string"></xs:element>
+    		<xs:element name="MessageContent" type="xs:string"></xs:element>
+    		<xs:element name="Protocol" type="xs:string"></xs:element>
+    		<xs:element name="MessageReceivedAt" type="xs:dateTime"></xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+</xs:schema>
